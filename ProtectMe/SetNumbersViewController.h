@@ -11,6 +11,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <Contacts/Contacts.h>
 #import <ContactsUI/ContactsUI.h>
+#import <CoreData/CoreData.h>
 
 //Test Comment for commits
 

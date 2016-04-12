@@ -27,6 +27,48 @@
 @synthesize contactsPicker;
 
 
+#pragma Mark
+#pragma Database Methods
+
+-(NSManagedObjectContext*)managedObjectContext
+{
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication]delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)])
+    {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
+
+-(void)addContactToStoreWithName:(NSString*)name andNumber:(NSString*)number
+{
+    NSManagedObjectContext *context  = [self managedObjectContext];
+    NSManagedObject *newContact = [NSEntityDescription insertNewObjectForEntityForName:@"ContactsTable" inManagedObjectContext:context];
+    [newContact setValue:name forKey:@"contactName"];
+    [newContact setValue:number forKey:@"contactNumber"];
+    NSError *error = nil;
+    if (![context save:&error])
+    {
+        NSLog(@"Can't save %@ %@",error, [error localizedDescription]);
+    }
+}
+
+-(void)updateTheView
+{
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"ContactsTable"];
+    self.contactsArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    [self.contactsTableView reloadData];
+    if (self.contactsArray.count == MAX_NUMBER_OF_CONTACTS)
+    {
+        [self.manageContactsButton setTitle:MANAGE_CONTACT_STRING forState:UIControlStateNormal];
+    }
+    [self.view setNeedsLayout];
+}
+
+#pragma Mark
+#pragma View Methods
 - (void)viewWillAppear:(BOOL)animated
 {
     // just add this line to the end of this method or create it if it does not exist
@@ -43,6 +85,16 @@
     CGFloat height = MIN(self.view.bounds.size.height, self.contactsTableView.contentSize.height);
     self.tableViewHeightConstraint.constant = height + 64;
     [self.view layoutIfNeeded];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"ContactsTable"];
+    self.contactsArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    [self.contactsTableView reloadData];
 }
 
 -(void)viewDidLoad
@@ -62,7 +114,10 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:contactCellId];
     }
-    cell.textLabel.text = [contactsArray objectAtIndex:indexPath.row];
+    
+    NSManagedObject *contactItem = [contactsArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [contactItem valueForKey:@"contactName"];
+    [cell.detailTextLabel setText:[contactItem valueForKey:@"contactNumber"]];
     return cell;
 }
 
@@ -85,9 +140,17 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSManagedObjectContext *context = [self managedObjectContext];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
+        [context deleteObject:[self.contactsArray objectAtIndex:indexPath.row]];
+        NSError *error = nil;
+        if (![context save:&error])
+        {
+            NSLog(@"Can't save %@ %@",error, [error localizedDescription]);
+        }
         [self.contactsArray removeObjectAtIndex:indexPath.row];
+        [self.contactsTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         if (indexPath.row < MAX_NUMBER_OF_CONTACTS)
         {
             [self.manageContactsButton setTitle:ADD_CONTACT_STRING forState:UIControlStateNormal];
@@ -130,19 +193,12 @@
         selectedContactNumber = [label.value stringValue];
         if ([selectedContactNumber length] > 0)
         {
-            [self.contactsArray insertObject:selectedContactName atIndex:self.contactsArray.count];
-            if (self.contactsArray.count == MAX_NUMBER_OF_CONTACTS)
-            {
-                [self.manageContactsButton setTitle:MANAGE_CONTACT_STRING forState:UIControlStateNormal];
-            }
+            [self addContactToStoreWithName:selectedContactName andNumber:selectedContactNumber];
             break;
         }
     }
-    [self.contactsTableView reloadData];
-    [self.view setNeedsLayout];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.view setNeedsDisplay];
-//    });
+    [self updateTheView];
+
 }
 
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
