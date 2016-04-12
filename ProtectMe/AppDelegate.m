@@ -17,6 +17,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    {
+        [self addMessagesToStore];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     return YES;
 }
 
@@ -121,6 +127,27 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+    }
+}
+
+-(void)addMessagesToStore
+{
+    NSManagedObjectContext *context  = [self managedObjectContext];
+    NSError *error = nil;
+    NSManagedObject *blueMessageItem = [NSEntityDescription insertNewObjectForEntityForName:@"MessagesTable" inManagedObjectContext:context];
+    [blueMessageItem setValue:@"Blue" forKey:@"messageType"];
+    [blueMessageItem setValue:@"Urgent Help Needed! <Location>" forKey:@"messageContent"];
+    if (![context save:&error])
+    {
+        NSLog(@"Can't save %@ %@",error, [error localizedDescription]);
+    }
+    
+    NSManagedObject *redMessageItem = [NSEntityDescription insertNewObjectForEntityForName:@"MessagesTable" inManagedObjectContext:context];
+    [redMessageItem setValue:@"Red" forKey:@"messageType"];
+    [redMessageItem setValue:@"Help! I'm in trouble at <Location>" forKey:@"messageContent"];
+    if (![context save:&error])
+    {
+        NSLog(@"Can't save %@ %@",error, [error localizedDescription]);
     }
 }
 

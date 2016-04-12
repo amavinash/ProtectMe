@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreData/CoreData.h>
 
 @interface ViewController : UIViewController<MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate , NSURLSessionTaskDelegate>
 {

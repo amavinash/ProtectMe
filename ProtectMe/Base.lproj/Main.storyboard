@@ -290,7 +290,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Urgent Help Needed! &lt;Location&gt;" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bqB-3K-6gj">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bqB-3K-6gj">
                                                 <rect key="frame" x="20" y="90" width="560" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -313,7 +313,7 @@
                                                     <constraint firstAttribute="width" constant="50" id="XeI-x9-kRi"/>
                                                 </constraints>
                                             </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Help! &lt;Location&gt;" translatesAutoresizingMaskIntoConstraints="NO" id="wB9-Gd-Gff">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wB9-Gd-Gff">
                                                 <rect key="frame" x="20" y="268" width="560" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -363,6 +363,10 @@
                             <constraint firstItem="CWC-qz-aoj" firstAttribute="top" secondItem="6ay-tM-oxg" secondAttribute="bottom" constant="-64" id="mbH-gk-xRC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="blueButtonMessageTextView" destination="bqB-3K-6gj" id="dvJ-R5-QwP"/>
+                        <outlet property="redButtonMessageTextView" destination="wB9-Gd-Gff" id="knA-1u-o07"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSt-db-e9Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

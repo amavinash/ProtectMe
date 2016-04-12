@@ -5,8 +5,8 @@
         <attribute name="contactNumber" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MessagesTable" syncable="YES">
-        <attribute name="blueButtonMessage" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="redButtonMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageContent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="ContactsTable" positionX="-63" positionY="-18" width="128" height="75"/>

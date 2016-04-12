@@ -11,6 +11,9 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) NSMutableArray *contactsArray;
+@property (nonatomic, weak) NSString *blueButtonMessage;
+@property (nonatomic, weak) NSString *redButtonMessage;
 @property (nonatomic,assign) double lattitudeVal;
 @property (nonatomic,assign) double longitudeVal;
 
@@ -21,6 +24,20 @@
 
 @synthesize lattitudeValue,lattitudeVal;
 @synthesize longitudeValue,longitudeVal;
+@synthesize contactsArray;
+@synthesize blueButtonMessage,redButtonMessage;
+
+
+-(NSManagedObjectContext*)managedObjectContext
+{
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication]delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)])
+    {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,10 +47,11 @@
     [locationManager requestWhenInUseAuthorization];
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     [locationManager requestLocation];
-    void (^testBlock)(void) = ^{
-        NSLog(@"This is sample Block");
-    };
-    testBlock();
+    [self fetchDataFromStore];
+//    void (^testBlock)(void) = ^{
+//        NSLog(@"This is sample Block");
+//    };
+//    testBlock();
     
 }
 
@@ -42,7 +60,28 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+-(void)fetchDataFromStore
+{
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"ContactsTable"];
+    NSMutableArray *storeRecords = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    for (NSManagedObject *contactItem  in storeRecords) {
+        [self.contactsArray addObject:[contactItem valueForKey:@"contactNumber"]];
+    }
+    NSFetchRequest *messagesFetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"MessagesTable"];
+    NSMutableArray *storeMessages = [[managedObjectContext executeFetchRequest:messagesFetchRequest error:nil] mutableCopy];
+    for (NSManagedObject *messageItem  in storeMessages)
+    {
+        if ([[messageItem valueForKey:@"messageType"] isEqualToString:@"Red"])
+        {
+            self.redButtonMessage = [messageItem valueForKey:@"messageContent"] ;
+        }
+        else
+        {
+            self.blueButtonMessage = [messageItem valueForKey:@"messageContent"];
+        }
+    }
+}
 
 //MessageViewController Delegate Methods
 - (IBAction)blueButtonTapped:(id)sender {
@@ -64,19 +103,19 @@
         
     }
     
-    NSArray *recipents = @[@"+12133590044",@"avinashb123@gmail.com"];
+    //NSArray *recipents = @[@"+12133590044",@"avinashb123@gmail.com"];
     
     NSString *lon = [NSString stringWithFormat:@"%.8f", longitudeVal];
     NSString *lat = [NSString stringWithFormat:@"%.8f", lattitudeVal];
     NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?center=%@,%@",lat,lon];
     
-    NSString *message = [NSString stringWithFormat:@"HELP!!! I am in Trouble at %@ \nPlease Help me!",locationHyperLink];
+    NSString *message = [NSString stringWithFormat:@"%@ %@",self.blueButtonMessage, locationHyperLink];
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     
     messageController.messageComposeDelegate = self;
     
-    [messageController setRecipients:recipents];
+    [messageController setRecipients:self.contactsArray];
     
     [messageController setBody:message];
     
@@ -104,16 +143,16 @@
         
     }
     
-    NSArray *recipents = @[@"012345678", @"9876543210"];
+    //NSArray *recipents = @[@"012345678", @"9876543210"];
     
-    NSString *message = [NSString stringWithFormat:@"HELP!!! I am in Trouble at <location> Please Help me!"];
+    NSString *message = [NSString stringWithFormat:@"%@", self.redButtonMessage];
     
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     
     messageController.messageComposeDelegate = self;
     
-    [messageController setRecipients:recipents];
+    [messageController setRecipients:self.contactsArray];
     
     [messageController setBody:message];
     
