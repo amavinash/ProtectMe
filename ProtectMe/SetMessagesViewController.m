@@ -18,6 +18,7 @@
 @implementation SetMessagesViewController
 
 @synthesize messagesArray;
+@synthesize scrollView;
 //@synthesize currentTextView;
 
 UITextView *currentTextView;
@@ -25,7 +26,6 @@ UITextView *currentTextView;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
 }
 
 -(void)viewDidLoad
@@ -37,8 +37,16 @@ UITextView *currentTextView;
     [self setupKeyboardAccessory];
     self.blueButtonMessageTextView.delegate = self;
     self.redButtonMessageTextView.delegate = self;
-
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(keyboardWasShown:)
+                                               name:UIKeyboardDidShowNotification
+                                             object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
@@ -118,7 +126,12 @@ UITextView *currentTextView;
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     currentTextView = textView;
+    textView.delegate = self;
 }
+
+#pragma mark
+#pragma Keyboard methods
+
 -(void)setupKeyboardAccessory
 {
     UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
@@ -135,4 +148,25 @@ UITextView *currentTextView;
 {
     [currentTextView resignFirstResponder];
 }
+
+-(void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary *info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    aRect.size.height -= 50;
+    if (!CGRectContainsPoint(aRect, currentTextView.frame.origin)) {
+
+        CGPoint scrollPoint = CGPointMake(0.0,kbSize.height + 64 + 50 - currentTextView.frame.origin.y);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+-(void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+
+    [self.scrollView setContentOffset:CGPointMake(0,-64) animated:YES];
+}
+
 @end
