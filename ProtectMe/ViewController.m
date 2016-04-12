@@ -12,8 +12,8 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) NSMutableArray *contactsArray;
-@property (nonatomic, weak) NSString *blueButtonMessage;
-@property (nonatomic, weak) NSString *redButtonMessage;
+@property (nonatomic, strong) NSString *blueButtonMessage;
+@property (nonatomic, strong) NSString *redButtonMessage;
 @property (nonatomic,assign) double lattitudeVal;
 @property (nonatomic,assign) double longitudeVal;
 
@@ -42,17 +42,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.contactsArray = [NSMutableArray array];
     locationManager = [[CLLocationManager alloc]init];
     locationManager.delegate = self;
     [locationManager requestWhenInUseAuthorization];
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     [locationManager requestLocation];
-    [self fetchDataFromStore];
 //    void (^testBlock)(void) = ^{
 //        NSLog(@"This is sample Block");
 //    };
 //    testBlock();
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    [self fetchDataFromStore];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +71,8 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"ContactsTable"];
     NSMutableArray *storeRecords = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    for (NSManagedObject *contactItem  in storeRecords) {
+    for (NSManagedObject *contactItem  in storeRecords)
+    {
         [self.contactsArray addObject:[contactItem valueForKey:@"contactNumber"]];
     }
     NSFetchRequest *messagesFetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"MessagesTable"];
@@ -85,7 +92,8 @@
 
 //MessageViewController Delegate Methods
 - (IBAction)blueButtonTapped:(id)sender {
-    if(![MFMessageComposeViewController canSendText]) {
+    if(![MFMessageComposeViewController canSendText])
+    {
         
         
         
@@ -102,32 +110,37 @@
         return;
         
     }
-    
-    //NSArray *recipents = @[@"+12133590044",@"avinashb123@gmail.com"];
-    
-    NSString *lon = [NSString stringWithFormat:@"%.8f", longitudeVal];
-    NSString *lat = [NSString stringWithFormat:@"%.8f", lattitudeVal];
-    NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?center=%@,%@",lat,lon];
-    
-    NSString *message = [NSString stringWithFormat:@"%@ %@",self.blueButtonMessage, locationHyperLink];
-    
-    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
-    
-    messageController.messageComposeDelegate = self;
-    
-    [messageController setRecipients:self.contactsArray];
-    
-    [messageController setBody:message];
-    
-    
-    
-    // Present message view controller on screen
-    
-    [self presentViewController:messageController animated:YES completion:nil];
+    else if (self.contactsArray.count == 0 )
+    {
+        [self showAlertWithMessage:@"Please add contacts from settings menu"];
+    }
+    else
+    {
+        //NSArray *recipents = @[@"+12133590044",@"avinashb123@gmail.com"];
+        
+        NSString *lon = [NSString stringWithFormat:@"%.8f", longitudeVal];
+        NSString *lat = [NSString stringWithFormat:@"%.8f", lattitudeVal];
+        NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?center=%@,%@",lat,lon];
+        
+        NSString *message = [NSString stringWithFormat:@"%@ %@",self.blueButtonMessage, locationHyperLink];
+        
+        MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+        
+        messageController.messageComposeDelegate = self;
+        
+        [messageController setRecipients:self.contactsArray];
+        
+        [messageController setBody:message];
+        
+        // Present message view controller on screen
+        
+        [self presentViewController:messageController animated:YES completion:nil];
+    }
 }
 
 - (IBAction)redButtonTapped:(id)sender {
-    if(![MFMessageComposeViewController canSendText]) {
+    if(![MFMessageComposeViewController canSendText])
+    {
         
         UIAlertController *warningAlert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                               message:@"Your device doesn't support SMS!"
@@ -142,26 +155,46 @@
         return;
         
     }
-    
-    //NSArray *recipents = @[@"012345678", @"9876543210"];
-    
-    NSString *message = [NSString stringWithFormat:@"%@", self.redButtonMessage];
-    
-    
-    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
-    
-    messageController.messageComposeDelegate = self;
-    
-    [messageController setRecipients:self.contactsArray];
-    
-    [messageController setBody:message];
-    
-    // Present message view controller on screen
-    
-    [self presentViewController:messageController animated:YES completion:nil];
+    else if (self.contactsArray.count == 0 )
+    {
+        [self showAlertWithMessage:@"Please add contacts from settings menu"];
+    }
+    else
+    {
+        
+        //NSArray *recipents = @[@"012345678", @"9876543210"];
+        NSString *lon = [NSString stringWithFormat:@"%.8f", longitudeVal];
+        NSString *lat = [NSString stringWithFormat:@"%.8f", lattitudeVal];
+        NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?center=%@,%@",lat,lon];
+        
+        NSString *message = [NSString stringWithFormat:@"%@ %@", self.redButtonMessage ,locationHyperLink ];
+        
+        
+        MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+        
+        messageController.messageComposeDelegate = self;
+        
+        [messageController setRecipients:self.contactsArray];
+        
+        [messageController setBody:message];
+        
+        // Present message view controller on screen
+        
+        [self presentViewController:messageController animated:YES completion:nil];
+    }
 }
 
-
+-(void)showAlertWithMessage:(NSString*)alertMessage
+{
+    UIAlertController *warningAlert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                          message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:nil];
+    [warningAlert addAction:ok];
+    
+    [self presentViewController:warningAlert animated:YES completion:nil];
+}
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
     switch (result)
@@ -174,14 +207,7 @@
             
         case MessageComposeResultFailed:
         {
-            UIAlertController *warningAlert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                                  message:@"Failed to send SMS!" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
-                                                         style:UIAlertActionStyleDefault
-                                                       handler:nil];
-            [warningAlert addAction:ok];
-            
-            [self presentViewController:warningAlert animated:YES completion:nil];
+            [self showAlertWithMessage:@"Failed to send SMS!"];
         }
         break;
             
