@@ -184,33 +184,29 @@
     NSLog(@"Contact Cancelled");
 }
 
-- (void)contactPicker:(CNContactPickerViewController *)picker didSelectContact:(CNContact *)contact
-{
-    NSString *selectedContactNumber;
-    NSString *selectedContactName = [NSString stringWithFormat:@"%@ %@", contact.givenName, contact.familyName];
-    for (CNLabeledValue *label in contact.phoneNumbers)
-    {
-        selectedContactNumber = [label.value stringValue];
-        if ([selectedContactNumber length] > 0)
-        {
-            [self addContactToStoreWithName:selectedContactName andNumber:selectedContactNumber];
-            break;
-        }
-    }
-    [self updateTheView];
-
-}
-
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
 {
-    NSLog(@"Contact Property Selected");
-    [self.contactsTableView reloadData];
+    CNContact *contact =  contactProperty.contact;
+    CNPhoneNumber *phoneNumber = contactProperty.value;
+    NSString *selectedContactNumber = [phoneNumber stringValue];
+    NSString *selectedContactName = [NSString stringWithFormat:@"%@ %@", contact.givenName, contact.familyName];
+    //check if the mobile number is valid and not the land line number
+    if ([selectedContactNumber length] > 7)
+    {
+        [self addContactToStoreWithName:selectedContactName andNumber:selectedContactNumber];
+        [self updateTheView];
+    }
+    else
+    {
+        // ToDo: Show Alert Here
+    }
 }
 
 -(void)showAddressBook
 {
     contactsPicker = [[CNContactPickerViewController alloc] init];
     [contactsPicker setDelegate:self];
+    contactsPicker.displayedPropertyKeys = [NSArray arrayWithObjects:CNContactPhoneNumbersKey, nil];
     [self presentViewController:contactsPicker animated:YES completion:nil];
 }
 @end
