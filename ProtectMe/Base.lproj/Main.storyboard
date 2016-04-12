@@ -383,8 +383,59 @@
                     <view key="view" contentMode="scaleToFill" id="2Ld-Lj-q3e">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BqJ-Jc-krT">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAt-DX-CBs">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AjT-WP-V5M">
+                                                <rect key="frame" x="10" y="10" width="580" height="516"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="516" id="bcu-0p-Lk6"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="AjT-WP-V5M" secondAttribute="trailing" constant="10" id="Ap6-87-rIg"/>
+                                            <constraint firstAttribute="bottom" secondItem="AjT-WP-V5M" secondAttribute="bottom" constant="10" id="OQp-ZS-tqI"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="536" id="Yze-5r-qaI"/>
+                                            <constraint firstAttribute="width" priority="750" constant="600" id="j3a-jm-QT6"/>
+                                            <constraint firstItem="AjT-WP-V5M" firstAttribute="top" secondItem="SAt-DX-CBs" secondAttribute="top" constant="10" id="jb4-DR-xw1"/>
+                                            <constraint firstItem="AjT-WP-V5M" firstAttribute="leading" secondItem="SAt-DX-CBs" secondAttribute="leading" constant="10" id="sMU-ui-xeM"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="SAt-DX-CBs" firstAttribute="width" secondItem="BqJ-Jc-krT" secondAttribute="width" id="Do8-Gb-CKA"/>
+                                    <constraint firstItem="SAt-DX-CBs" firstAttribute="top" secondItem="BqJ-Jc-krT" secondAttribute="top" id="UrY-R3-6eL"/>
+                                    <constraint firstItem="SAt-DX-CBs" firstAttribute="leading" secondItem="BqJ-Jc-krT" secondAttribute="leading" id="XoF-43-H2q"/>
+                                    <constraint firstAttribute="bottom" secondItem="SAt-DX-CBs" secondAttribute="bottom" id="jJF-2I-NrA"/>
+                                    <constraint firstAttribute="trailing" secondItem="SAt-DX-CBs" secondAttribute="trailing" id="o8f-oZ-xcg"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ej6-PG-Awr" firstAttribute="top" secondItem="BqJ-Jc-krT" secondAttribute="bottom" id="8i4-pn-WJb"/>
+                            <constraint firstItem="BqJ-Jc-krT" firstAttribute="top" secondItem="KIb-Vp-rKX" secondAttribute="bottom" constant="-64" id="GZa-kI-Ug6"/>
+                            <constraint firstItem="BqJ-Jc-krT" firstAttribute="leading" secondItem="2Ld-Lj-q3e" secondAttribute="leading" id="lBz-Co-bn7"/>
+                            <constraint firstAttribute="trailing" secondItem="BqJ-Jc-krT" secondAttribute="trailing" id="pfx-Em-uU3"/>
+                            <constraint firstItem="BqJ-Jc-krT" firstAttribute="top" secondItem="2Ld-Lj-q3e" secondAttribute="top" id="x6W-Te-sUY"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="GZa-kI-Ug6"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="aboutMeMessage" destination="AjT-WP-V5M" id="Lmo-Xf-fSd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNP-Pl-Di6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

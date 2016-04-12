@@ -11,12 +11,16 @@
 @interface SetMessagesViewController ()
 
 @property (nonatomic, strong) NSMutableArray *messagesArray;
+//@property (nonatomic, strong) UITextView *currentTextView;
 
 @end
 
 @implementation SetMessagesViewController
 
 @synthesize messagesArray;
+//@synthesize currentTextView;
+
+UITextView *currentTextView;
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -30,11 +34,9 @@
     self.title = @"Set Messages";
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveMessages)];
     self.navigationItem.rightBarButtonItem = saveButton;
-    
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
-    {
-   
-    }
+    [self setupKeyboardAccessory];
+    self.blueButtonMessageTextView.delegate = self;
+    self.redButtonMessageTextView.delegate = self;
 
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -95,7 +97,8 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"MessagesTable"];
     self.messagesArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    for (NSManagedObject *messageItem in self.messagesArray) {
+    for (NSManagedObject *messageItem in self.messagesArray)
+    {
         if ([[messageItem valueForKey:@"messageType"] isEqualToString:@"Red"])
         {
             [messageItem setValue:self.redButtonMessageTextView.text forKey:@"messageContent"];
@@ -112,4 +115,24 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    currentTextView = textView;
+}
+-(void)setupKeyboardAccessory
+{
+    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    toolbar.barStyle = UIBarStyleDefault;
+    toolbar.items = [NSArray arrayWithObjects:
+                     [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                     [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneWithTyping)], nil];
+    [toolbar sizeToFit];
+    self.blueButtonMessageTextView.inputAccessoryView = toolbar;
+    self.redButtonMessageTextView.inputAccessoryView = toolbar;
+}
+
+-(void)doneWithTyping
+{
+    [currentTextView resignFirstResponder];
+}
 @end

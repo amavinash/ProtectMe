@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface SetMessagesViewController : UIViewController
+@interface SetMessagesViewController : UIViewController <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *blueButtonMessageTextView;
 @property (weak, nonatomic) IBOutlet UITextView *redButtonMessageTextView;

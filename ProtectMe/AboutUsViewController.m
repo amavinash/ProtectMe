@@ -13,7 +13,26 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"About Us";
+    self.title = @"About ProtectMe";
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"AboutProtectMe" ofType:@"txt"];
+    NSError *error = nil;
+    NSString *data = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    if (error)
+    {
+        UIAlertController *warningAlert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                              message:@"Error opening file"
+                                                                       preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+        [warningAlert addAction:ok];
+        
+        [self presentViewController:warningAlert animated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else{
+        [self.aboutMeMessage setText:data];
+    }
 }
 
 @end

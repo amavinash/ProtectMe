@@ -23,6 +23,7 @@
 		E19718561C8EDEA400FD0FA4 /* ContactUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19718551C8EDEA400FD0FA4 /* ContactUsViewController.m */; };
 		E19718591C8EE01700FD0FA4 /* SetMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19718581C8EE01700FD0FA4 /* SetMessagesViewController.m */; };
 		E19DB0821C757B15005E417D /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19DB0811C757B15005E417D /* SettingsTableViewController.m */; };
+		E19ED3261CBCFBD30086BB03 /* AboutProtectMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = E19ED3251CBCFBD30086BB03 /* AboutProtectMe.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		E19718581C8EE01700FD0FA4 /* SetMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMessagesViewController.m; sourceTree = "<group>"; };
 		E19DB0801C757B15005E417D /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		E19DB0811C757B15005E417D /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		E19ED3251CBCFBD30086BB03 /* AboutProtectMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AboutProtectMe.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				E14EB3E91C6100B000AF7767 /* CoreLocation.framework */,
 				E14EB3E71C60F7F900AF7767 /* MessageUI.framework */,
 				E195669F1C3D56B700FBC75F /* ProtectMe */,
+				E19566A01C3D56B700FBC75F /* Supporting Files */,
 				E19566BC1C3D56B700FBC75F /* ProtectMeTests */,
 				E19566C71C3D56B700FBC75F /* ProtectMeUITests */,
 				E195669E1C3D56B700FBC75F /* Products */,
@@ -135,7 +138,6 @@
 				E19566B11C3D56B700FBC75F /* LaunchScreen.storyboard */,
 				E19566B41C3D56B700FBC75F /* Info.plist */,
 				E19566AC1C3D56B700FBC75F /* ProtectMe.xcdatamodeld */,
-				E19566A01C3D56B700FBC75F /* Supporting Files */,
 				E19DB0801C757B15005E417D /* SettingsTableViewController.h */,
 				E19DB0811C757B15005E417D /* SettingsTableViewController.m */,
 				E197184E1C8EDE5300FD0FA4 /* SetNumbersViewController.h */,
@@ -153,9 +155,12 @@
 		E19566A01C3D56B700FBC75F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E19ED3241CBCFBAF0086BB03 /* Resources */,
+				E19ED3231CBCFBAA0086BB03 /* Images */,
 				E19566A11C3D56B700FBC75F /* main.m */,
 			);
 			name = "Supporting Files";
+			path = ProtectMe;
 			sourceTree = "<group>";
 		};
 		E19566BC1C3D56B700FBC75F /* ProtectMeTests */ = {
@@ -174,6 +179,21 @@
 				E19566CA1C3D56B800FBC75F /* Info.plist */,
 			);
 			path = ProtectMeUITests;
+			sourceTree = "<group>";
+		};
+		E19ED3231CBCFBAA0086BB03 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		E19ED3241CBCFBAF0086BB03 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E19ED3251CBCFBD30086BB03 /* AboutProtectMe.txt */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +309,7 @@
 			files = (
 				E19566B31C3D56B700FBC75F /* LaunchScreen.storyboard in Resources */,
 				E19566B01C3D56B700FBC75F /* Assets.xcassets in Resources */,
+				E19ED3261CBCFBD30086BB03 /* AboutProtectMe.txt in Resources */,
 				E19566AB1C3D56B700FBC75F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
