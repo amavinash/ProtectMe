@@ -8,7 +8,9 @@
 
 #import "SetNumbersViewController.h"
 
-#define NUMBER_OF_CONTACTS 5
+#define MAX_NUMBER_OF_CONTACTS  5
+#define ADD_CONTACT_STRING      @"Add Contact"
+#define MANAGE_CONTACT_STRING   @"Manage Contacts"
 
 @interface SetNumbersViewController ()
 
@@ -27,24 +29,28 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // just add this line to the end of this method or create it if it does not exist
+    
+    [super viewWillAppear:YES];
+    
     [self.contactsTableView reloadData];
-    CGFloat height = MIN(self.view.bounds.size.height, self.contactsTableView.contentSize.height);
-    self.tableViewHeight.constant = height;
-    [self.view layoutIfNeeded];
 }
 
-//-(void)viewDidLayoutSubviews
-//{
-//    CGFloat height = MIN(self.view.bounds.size.height, self.contactsTableView.contentSize.height);
-//    self.tableViewHeight.constant = height;
-//    [self.view layoutIfNeeded];
-//}
+-(void)viewWillLayoutSubviews
+{
+    NSLog(@"%f",self.view.bounds.size.height);
+
+    CGFloat height = MIN(self.view.bounds.size.height, self.contactsTableView.contentSize.height);
+    self.tableViewHeightConstraint.constant = height + 64;
+    [self.view layoutIfNeeded];
+}
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.contactsTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     self.title = @"Set Numbers";
-    self.contactsArray = [NSMutableArray arrayWithObjects:@"Add Number", nil];
+    [self.manageContactsButton setTitle:ADD_CONTACT_STRING forState:UIControlStateNormal];
+    self.contactsArray = [NSMutableArray array];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,40 +73,43 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.contactsTableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (self.contactsArray.count < 6)
-    {
-        if (indexPath.row == self.contactsArray.count - 1) {
-            [self showAddressBook];
-        }
-    }
-    else
-    {
-        
-    }
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BOOL canEditRow = YES;
-    if (indexPath.row == self.contactsArray.count - 1 && self.contactsArray.count != 5) {
-        canEditRow = NO;
-    }
     return canEditRow;
 }
 
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
         [self.contactsArray removeObjectAtIndex:indexPath.row];
-        if (indexPath.row == 4)
+        if (indexPath.row < MAX_NUMBER_OF_CONTACTS)
         {
-            [self.contactsArray addObject:@"Add Number"];
+            [self.manageContactsButton setTitle:ADD_CONTACT_STRING forState:UIControlStateNormal];
         }
     }
+    [self.contactsTableView setEditing:NO animated:YES];
     [self.contactsTableView reloadData];
-    [self.view setNeedsLayout];
-    [self.view layoutSubviews];
+    [self.view setNeedsDisplay];
+}
+
+#pragma MARK
+#pragma Add Button Logic
+
+- (IBAction)addButtonDidClick:(id)sender
+{
+    if (self.contactsArray.count < MAX_NUMBER_OF_CONTACTS)
+    {
+        [self showAddressBook];
+    }
+    else
+    {
+        [self.contactsTableView setEditing:YES animated:YES];
+    }
 }
 
 #pragma MARK
@@ -110,32 +119,39 @@
 {
     NSLog(@"Contact Cancelled");
 }
+
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContact:(CNContact *)contact
 {
     NSString *selectedContactNumber;
     NSString *selectedContactName = [NSString stringWithFormat:@"%@ %@", contact.givenName, contact.familyName];
-    for (CNLabeledValue *label in contact.phoneNumbers) {
+    for (CNLabeledValue *label in contact.phoneNumbers)
+    {
         selectedContactNumber = [label.value stringValue];
         if ([selectedContactNumber length] > 0)
         {
-            [self.contactsArray insertObject:selectedContactName atIndex:self.contactsArray.count - 1];
-            if (self.contactsArray.count == 6)
+            [self.contactsArray insertObject:selectedContactName atIndex:self.contactsArray.count];
+            if (self.contactsArray.count == MAX_NUMBER_OF_CONTACTS)
             {
-                [self.contactsArray removeLastObject];
+                [self.manageContactsButton setTitle:MANAGE_CONTACT_STRING forState:UIControlStateNormal];
             }
-            return;
+            break;
         }
     }
     [self.contactsTableView reloadData];
     [self.view setNeedsLayout];
-    [self.view layoutSubviews];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.view setNeedsDisplay];
+//    });
 }
+
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
 {
     NSLog(@"Contact Property Selected");
+    [self.contactsTableView reloadData];
 }
 
--(void)showAddressBook{
+-(void)showAddressBook
+{
     contactsPicker = [[CNContactPickerViewController alloc] init];
     [contactsPicker setDelegate:self];
     [self presentViewController:contactsPicker animated:YES completion:nil];

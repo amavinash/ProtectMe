@@ -199,43 +199,59 @@
                         <viewControllerLayoutGuide type="top" id="tzr-hs-iom"/>
                         <viewControllerLayoutGuide type="bottom" id="JBS-uq-4We"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="X49-gO-z9b">
+                    <view key="view" alpha="0.94999999999999996" contentMode="scaleToFill" id="X49-gO-z9b">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add 5 contacts of your choice to get help during emergency." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzd-hT-NjJ">
-                                <rect key="frame" x="20" y="128" width="560" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X44-s7-IGt">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X44-s7-IGt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="134"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="TTf-zt-Ity"/>
+                                    <constraint firstAttribute="height" constant="134" id="fMy-Uy-CNN"/>
                                 </constraints>
+                                <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="PLH-Dj-Gi5" id="euI-yW-AJS"/>
                                     <outlet property="delegate" destination="PLH-Dj-Gi5" id="70l-t1-lzr"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THL-Ss-fDd">
+                                <rect key="frame" x="0.0" y="134" width="600" height="44"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="QXU-3V-4wM"/>
+                                </constraints>
+                                <state key="normal" title="Manage Contacts"/>
+                                <connections>
+                                    <action selector="addButtonDidClick:" destination="PLH-Dj-Gi5" eventType="touchUpInside" id="qHH-GU-gda"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add 5 contacts of your choice to get help during emergency." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQI-1F-WkZ">
+                                <rect key="frame" x="20" y="208" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="lzd-hT-NjJ" secondAttribute="trailing" constant="20" id="7qO-Gj-Hb1"/>
-                            <constraint firstItem="lzd-hT-NjJ" firstAttribute="leading" secondItem="X49-gO-z9b" secondAttribute="leading" constant="20" id="9oD-4o-bly"/>
+                            <constraint firstItem="JBS-uq-4We" firstAttribute="top" relation="lessThanOrEqual" secondItem="dQI-1F-WkZ" secondAttribute="bottom" priority="250" constant="355" id="0vY-X6-qPf"/>
+                            <constraint firstItem="THL-Ss-fDd" firstAttribute="leading" secondItem="X49-gO-z9b" secondAttribute="leading" id="1TV-FH-9Fd"/>
                             <constraint firstAttribute="trailing" secondItem="X44-s7-IGt" secondAttribute="trailing" id="Bv6-VK-17O"/>
                             <constraint firstItem="X44-s7-IGt" firstAttribute="leading" secondItem="X49-gO-z9b" secondAttribute="leading" id="CdT-5D-q9x"/>
-                            <constraint firstItem="JBS-uq-4We" firstAttribute="top" secondItem="lzd-hT-NjJ" secondAttribute="bottom" priority="250" constant="451" id="bdf-EH-H1t"/>
-                            <constraint firstItem="lzd-hT-NjJ" firstAttribute="top" secondItem="X44-s7-IGt" secondAttribute="bottom" constant="20" id="hat-da-tn3"/>
-                            <constraint firstItem="X44-s7-IGt" firstAttribute="top" secondItem="X49-gO-z9b" secondAttribute="top" constant="64" id="kEQ-ug-2iH"/>
+                            <constraint firstItem="THL-Ss-fDd" firstAttribute="top" secondItem="X44-s7-IGt" secondAttribute="bottom" id="Gpr-yy-fM9"/>
+                            <constraint firstAttribute="trailing" secondItem="THL-Ss-fDd" secondAttribute="trailing" id="Gst-KS-SSZ"/>
+                            <constraint firstAttribute="trailing" secondItem="dQI-1F-WkZ" secondAttribute="trailing" constant="20" id="HjF-GG-4wK"/>
+                            <constraint firstItem="X44-s7-IGt" firstAttribute="top" secondItem="X49-gO-z9b" secondAttribute="top" id="WhD-74-Nnw"/>
+                            <constraint firstItem="dQI-1F-WkZ" firstAttribute="top" secondItem="THL-Ss-fDd" secondAttribute="bottom" constant="30" id="uGg-Lj-eb3"/>
+                            <constraint firstItem="dQI-1F-WkZ" firstAttribute="leading" secondItem="X49-gO-z9b" secondAttribute="leading" constant="20" id="yth-ZD-0M5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="contactsTableView" destination="X44-s7-IGt" id="Wy9-S4-TdA"/>
-                        <outlet property="informationLabel" destination="lzd-hT-NjJ" id="tn8-oq-OoP"/>
-                        <outlet property="tableViewHeight" destination="TTf-zt-Ity" id="byS-kv-cXi"/>
+                        <outlet property="informationLabel" destination="dQI-1F-WkZ" id="KSx-1C-vau"/>
+                        <outlet property="manageContactsButton" destination="THL-Ss-fDd" id="5GF-4i-jUq"/>
+                        <outlet property="tableViewHeightConstraint" destination="fMy-Uy-CNN" id="4Ff-y3-X2p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sa9-Xt-Gt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,7 +287,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type Message For the red button." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L4-ut-Ihg">
                                                 <rect key="frame" x="90" y="198" width="490" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Urgent Help Needed! &lt;Location&gt;" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bqB-3K-6gj">
@@ -286,7 +302,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type Message For the blue button." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abG-hD-9FA">
                                                 <rect key="frame" x="90" y="20" width="490" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4ot-o9-dgW">

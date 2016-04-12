@@ -13,9 +13,11 @@
 #import <ContactsUI/ContactsUI.h>
 
 @interface SetNumbersViewController : UIViewController<UITableViewDataSource , UITableViewDelegate , ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate>
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet UITableView *contactsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *informationLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIButton *manageContactsButton;
 
 @end
