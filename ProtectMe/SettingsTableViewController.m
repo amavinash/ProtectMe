@@ -11,6 +11,7 @@
 #import "SetMessagesViewController.h"
 #import "AboutUsViewController.h"
 #import "ContactUsViewController.h"
+#import "TnCViewController.h"
 
 @interface SettingsTableViewController()
 
@@ -22,7 +23,7 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    self.settingOptions = @[@"Set Numbers", @"Set Messages", @"About Us", @"Contact Us"];
+    self.settingOptions = @[@"Set Numbers", @"Set Messages", @"About Us", @"Contact Us",@"Terms & Conditions"];
     self.title = @"ProtectMe";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
@@ -75,6 +76,11 @@
                 [self.navigationController pushViewController:dvc animated:YES];
             }
             break;
+        case 4:
+            {
+                TnCViewController *dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"TnCViewController"];
+                [self.navigationController pushViewController:dvc animated:YES];
+            }
             
         default:
             break;

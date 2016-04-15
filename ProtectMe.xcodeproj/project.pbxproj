@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E14EB3E81C60F7F900AF7767 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14EB3E71C60F7F900AF7767 /* MessageUI.framework */; };
 		E14EB3EA1C6100B000AF7767 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14EB3E91C6100B000AF7767 /* CoreLocation.framework */; };
+		E18AC3931CBE523F00BB2843 /* TnCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18AC3921CBE523F00BB2843 /* TnCViewController.m */; };
 		E19566A21C3D56B700FBC75F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E19566A11C3D56B700FBC75F /* main.m */; };
 		E19566A51C3D56B700FBC75F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E19566A41C3D56B700FBC75F /* AppDelegate.m */; };
 		E19566A81C3D56B700FBC75F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19566A71C3D56B700FBC75F /* ViewController.m */; };
@@ -46,6 +47,8 @@
 /* Begin PBXFileReference section */
 		E14EB3E71C60F7F900AF7767 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E14EB3E91C6100B000AF7767 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E18AC3911CBE523F00BB2843 /* TnCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TnCViewController.h; sourceTree = "<group>"; };
+		E18AC3921CBE523F00BB2843 /* TnCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TnCViewController.m; sourceTree = "<group>"; };
 		E195669D1C3D56B700FBC75F /* ProtectMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProtectMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E19566A11C3D56B700FBC75F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E19566A31C3D56B700FBC75F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				E19718521C8EDE7C00FD0FA4 /* AboutUsViewController.m */,
 				E19718541C8EDEA400FD0FA4 /* ContactUsViewController.h */,
 				E19718551C8EDEA400FD0FA4 /* ContactUsViewController.m */,
+				E18AC3911CBE523F00BB2843 /* TnCViewController.h */,
+				E18AC3921CBE523F00BB2843 /* TnCViewController.m */,
 			);
 			path = ProtectMe;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				E19718561C8EDEA400FD0FA4 /* ContactUsViewController.m in Sources */,
 				E19DB0821C757B15005E417D /* SettingsTableViewController.m in Sources */,
 				E19718591C8EE01700FD0FA4 /* SetMessagesViewController.m in Sources */,
+				E18AC3931CBE523F00BB2843 /* TnCViewController.m in Sources */,
 				E19566A51C3D56B700FBC75F /* AppDelegate.m in Sources */,
 				E19566A21C3D56B700FBC75F /* main.m in Sources */,
 				E19718531C8EDE7C00FD0FA4 /* AboutUsViewController.m in Sources */,
