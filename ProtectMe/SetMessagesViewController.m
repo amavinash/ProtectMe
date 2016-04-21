@@ -84,14 +84,14 @@ UITextView *currentTextView;
     NSError *error = nil;
     NSManagedObject *messageItem = [NSEntityDescription insertNewObjectForEntityForName:@"MessagesTable" inManagedObjectContext:context];
     [messageItem setValue:@"Blue" forKey:@"messageType"];
-    [messageItem setValue:@"Urgent Help Needed! <Location>" forKey:@"messageContent"];
+    [messageItem setValue:@"Urgent Help Needed!" forKey:@"messageContent"];
     if (![context save:&error])
     {
         NSLog(@"Can't save %@ %@",error, [error localizedDescription]);
     }
     
     [messageItem setValue:@"Red" forKey:@"messageType"];
-    [messageItem setValue:@"Help! I'm in trouble at <Location>" forKey:@"messageContent"];
+    [messageItem setValue:@"Help! I'm in trouble at " forKey:@"messageContent"];
     if (![context save:&error])
     {
         NSLog(@"Can't save %@ %@",error, [error localizedDescription]);

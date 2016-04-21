@@ -10,4 +10,6 @@
 
 @interface TnCViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *tncLabel;
+
 @end
