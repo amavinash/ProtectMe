@@ -136,7 +136,7 @@
     NSError *error = nil;
     NSManagedObject *blueMessageItem = [NSEntityDescription insertNewObjectForEntityForName:@"MessagesTable" inManagedObjectContext:context];
     [blueMessageItem setValue:@"Blue" forKey:@"messageType"];
-    [blueMessageItem setValue:@"Urgent Help Needed! <Location>" forKey:@"messageContent"];
+    [blueMessageItem setValue:@"Urgent Help Needed! " forKey:@"messageContent"];
     if (![context save:&error])
     {
         NSLog(@"Can't save %@ %@",error, [error localizedDescription]);
@@ -144,7 +144,7 @@
     
     NSManagedObject *redMessageItem = [NSEntityDescription insertNewObjectForEntityForName:@"MessagesTable" inManagedObjectContext:context];
     [redMessageItem setValue:@"Red" forKey:@"messageType"];
-    [redMessageItem setValue:@"Help! I'm in trouble at <Location>" forKey:@"messageContent"];
+    [redMessageItem setValue:@"Help! I'm in trouble at " forKey:@"messageContent"];
     if (![context save:&error])
     {
         NSLog(@"Can't save %@ %@",error, [error localizedDescription]);

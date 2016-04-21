@@ -120,7 +120,7 @@
         
         NSString *lon = [NSString stringWithFormat:@"%.8f", longitudeVal];
         NSString *lat = [NSString stringWithFormat:@"%.8f", lattitudeVal];
-        NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?center=%@,%@",lat,lon];
+        NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?q=%@,%@",lat,lon];
         
         NSString *message = [NSString stringWithFormat:@"%@ %@",self.blueButtonMessage, locationHyperLink];
         
@@ -165,7 +165,7 @@
         //NSArray *recipents = @[@"012345678", @"9876543210"];
         NSString *lon = [NSString stringWithFormat:@"%.8f", longitudeVal];
         NSString *lat = [NSString stringWithFormat:@"%.8f", lattitudeVal];
-        NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?center=%@,%@",lat,lon];
+        NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?q=%@,%@",lat,lon];
         
         NSString *message = [NSString stringWithFormat:@"%@ %@", self.redButtonMessage ,locationHyperLink ];
         
