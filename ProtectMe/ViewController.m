@@ -26,6 +26,7 @@
 @synthesize longitudeValue,longitudeVal;
 @synthesize contactsArray;
 @synthesize blueButtonMessage,redButtonMessage;
+@synthesize backgroundImage;
 
 
 -(NSManagedObjectContext*)managedObjectContext
@@ -48,6 +49,13 @@
     [locationManager requestWhenInUseAuthorization];
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     [locationManager requestLocation];
+    
+    //Background image for the view
+    NSNumber *screenHeight = @([UIScreen mainScreen].bounds.size.height);
+    NSString *imageName = [NSString stringWithFormat:@"homeScreen-%@h", screenHeight];
+    UIImage *image = [UIImage imageNamed:imageName];
+    [self.backgroundImage setImage:image];
+    [self.view sendSubviewToBack:self.backgroundImage];
 //    void (^testBlock)(void) = ^{
 //        NSLog(@"This is sample Block");
 //    };

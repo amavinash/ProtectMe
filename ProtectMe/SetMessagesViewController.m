@@ -19,6 +19,7 @@
 
 @synthesize messagesArray;
 @synthesize scrollView;
+@synthesize backgroundImage;
 //@synthesize currentTextView;
 
 UITextView *currentTextView;
@@ -31,6 +32,14 @@ UITextView *currentTextView;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Background image for the view
+    NSNumber *screenHeight = @([UIScreen mainScreen].bounds.size.height);
+    NSString *imageName = [NSString stringWithFormat:@"waterMark-%@h", screenHeight];
+    UIImage *image = [UIImage imageNamed:imageName];
+    [self.backgroundImage setImage:image];
+    [self.view sendSubviewToBack:self.backgroundImage];
+    
     self.title = @"Set Messages";
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveMessages)];
     self.navigationItem.rightBarButtonItem = saveButton;

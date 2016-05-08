@@ -27,7 +27,7 @@
 @synthesize contactsPicker;
 
 
-#pragma Mark
+#pragma mark-
 #pragma Database Methods
 
 -(NSManagedObjectContext*)managedObjectContext
@@ -53,6 +53,20 @@
         NSLog(@"Can't save %@ %@",error, [error localizedDescription]);
     }
 }
+
+//-(void)deleteContactFromStoreWithName:(NSString*)name andNumber:(NSString*)number
+//{
+//    NSManagedObjectContext *context  = [self managedObjectContext];
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"ContactsTable"];
+//    NSManagedObject *newContact = [NSEntityDescription insertNewObjectForEntityForName:@"ContactsTable" inManagedObjectContext:context];
+//    [newContact setValue:name forKey:@"contactName"];
+//    [newContact setValue:number forKey:@"contactNumber"];
+//    NSError *error = nil;
+//    if (![context save:&error])
+//    {
+//        NSLog(@"Can't save %@ %@",error, [error localizedDescription]);
+//    }
+//}
 
 -(void)updateTheView
 {

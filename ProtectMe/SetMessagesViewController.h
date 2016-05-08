@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *blueButtonMessageTextView;
 @property (weak, nonatomic) IBOutlet UITextView *redButtonMessageTextView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @end

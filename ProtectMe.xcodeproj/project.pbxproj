@@ -26,6 +26,14 @@
 		E19718591C8EE01700FD0FA4 /* SetMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19718581C8EE01700FD0FA4 /* SetMessagesViewController.m */; };
 		E19DB0821C757B15005E417D /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19DB0811C757B15005E417D /* SettingsTableViewController.m */; };
 		E19ED3261CBCFBD30086BB03 /* AboutProtectMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = E19ED3251CBCFBD30086BB03 /* AboutProtectMe.txt */; };
+		E1F1765B1CC9336B00C2AF29 /* homeScreen-480h.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F176571CC9336B00C2AF29 /* homeScreen-480h.png */; };
+		E1F1765C1CC9336B00C2AF29 /* homeScreen-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F176581CC9336B00C2AF29 /* homeScreen-568h.png */; };
+		E1F1765D1CC9336B00C2AF29 /* homeScreen-667h.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F176591CC9336B00C2AF29 /* homeScreen-667h.png */; };
+		E1F1765E1CC9336B00C2AF29 /* homeScreen-736h.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F1765A1CC9336B00C2AF29 /* homeScreen-736h.png */; };
+		E1F176641CC9393F00C2AF29 /* waterMark-480h.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F176601CC9393F00C2AF29 /* waterMark-480h.png */; };
+		E1F176651CC9393F00C2AF29 /* waterMark-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F176611CC9393F00C2AF29 /* waterMark-568h.png */; };
+		E1F176661CC9393F00C2AF29 /* waterMark-667h.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F176621CC9393F00C2AF29 /* waterMark-667h.png */; };
+		E1F176671CC9393F00C2AF29 /* waterMark-736h.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F176631CC9393F00C2AF29 /* waterMark-736h.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +87,14 @@
 		E19DB0801C757B15005E417D /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		E19DB0811C757B15005E417D /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		E19ED3251CBCFBD30086BB03 /* AboutProtectMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AboutProtectMe.txt; sourceTree = "<group>"; };
+		E1F176571CC9336B00C2AF29 /* homeScreen-480h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeScreen-480h.png"; sourceTree = "<group>"; };
+		E1F176581CC9336B00C2AF29 /* homeScreen-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeScreen-568h.png"; sourceTree = "<group>"; };
+		E1F176591CC9336B00C2AF29 /* homeScreen-667h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeScreen-667h.png"; sourceTree = "<group>"; };
+		E1F1765A1CC9336B00C2AF29 /* homeScreen-736h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeScreen-736h.png"; sourceTree = "<group>"; };
+		E1F176601CC9393F00C2AF29 /* waterMark-480h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waterMark-480h.png"; sourceTree = "<group>"; };
+		E1F176611CC9393F00C2AF29 /* waterMark-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waterMark-568h.png"; sourceTree = "<group>"; };
+		E1F176621CC9393F00C2AF29 /* waterMark-667h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waterMark-667h.png"; sourceTree = "<group>"; };
+		E1F176631CC9393F00C2AF29 /* waterMark-736h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waterMark-736h.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +207,8 @@
 		E19ED3231CBCFBAA0086BB03 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E1F176561CC9335C00C2AF29 /* HomeScreen Images */,
+				E1F1765F1CC938DA00C2AF29 /* Watermark Images */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -202,6 +220,28 @@
 				E19ED3251CBCFBD30086BB03 /* AboutProtectMe.txt */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		E1F176561CC9335C00C2AF29 /* HomeScreen Images */ = {
+			isa = PBXGroup;
+			children = (
+				E1F176571CC9336B00C2AF29 /* homeScreen-480h.png */,
+				E1F176581CC9336B00C2AF29 /* homeScreen-568h.png */,
+				E1F176591CC9336B00C2AF29 /* homeScreen-667h.png */,
+				E1F1765A1CC9336B00C2AF29 /* homeScreen-736h.png */,
+			);
+			name = "HomeScreen Images";
+			sourceTree = "<group>";
+		};
+		E1F1765F1CC938DA00C2AF29 /* Watermark Images */ = {
+			isa = PBXGroup;
+			children = (
+				E1F176601CC9393F00C2AF29 /* waterMark-480h.png */,
+				E1F176611CC9393F00C2AF29 /* waterMark-568h.png */,
+				E1F176621CC9393F00C2AF29 /* waterMark-667h.png */,
+				E1F176631CC9393F00C2AF29 /* waterMark-736h.png */,
+			);
+			name = "Watermark Images";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,11 +355,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1F176651CC9393F00C2AF29 /* waterMark-568h.png in Resources */,
+				E1F1765E1CC9336B00C2AF29 /* homeScreen-736h.png in Resources */,
+				E1F1765B1CC9336B00C2AF29 /* homeScreen-480h.png in Resources */,
 				E1967E421CC7BEF8007F8403 /* TC.txt in Resources */,
+				E1F1765C1CC9336B00C2AF29 /* homeScreen-568h.png in Resources */,
 				E19566B31C3D56B700FBC75F /* LaunchScreen.storyboard in Resources */,
 				E19566B01C3D56B700FBC75F /* Assets.xcassets in Resources */,
+				E1F176661CC9393F00C2AF29 /* waterMark-667h.png in Resources */,
 				E19ED3261CBCFBD30086BB03 /* AboutProtectMe.txt in Resources */,
 				E19566AB1C3D56B700FBC75F /* Main.storyboard in Resources */,
+				E1F176671CC9393F00C2AF29 /* waterMark-736h.png in Resources */,
+				E1F176641CC9393F00C2AF29 /* waterMark-480h.png in Resources */,
+				E1F1765D1CC9336B00C2AF29 /* homeScreen-667h.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,8 +17,9 @@
 
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *lattitudeValue;
-@property (weak, nonatomic) IBOutlet UILabel *longitudeValue;
+@property (weak, nonatomic) UILabel *lattitudeValue;
+@property (weak, nonatomic) UILabel *longitudeValue;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @end
 
