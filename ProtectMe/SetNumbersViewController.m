@@ -88,13 +88,22 @@
     // just add this line to the end of this method or create it if it does not exist
     
     [super viewWillAppear:YES];
-    
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"ContactsTable"];
+    self.contactsArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     [self.contactsTableView reloadData];
+    if (self.contactsArray.count == MAX_NUMBER_OF_CONTACTS)
+    {
+        [self.manageContactsButton setTitle:MANAGE_CONTACT_STRING forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.manageContactsButton setTitle:ADD_CONTACT_STRING forState:UIControlStateNormal];
+    }
 }
 
 -(void)viewWillLayoutSubviews
 {
-    NSLog(@"%f",self.view.bounds.size.height);
 
     CGFloat height = MIN(self.view.bounds.size.height, self.contactsTableView.contentSize.height);
     self.tableViewHeightConstraint.constant = height + 64;
@@ -102,21 +111,16 @@
 }
 
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:YES];
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"ContactsTable"];
-    self.contactsArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    [self.contactsTableView reloadData];
-}
+//-(void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:YES];
+//}
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     self.contactsTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     self.title = @"Set Numbers";
-    [self.manageContactsButton setTitle:ADD_CONTACT_STRING forState:UIControlStateNormal];
     self.contactsArray = [NSMutableArray array];
 }
 
@@ -149,6 +153,24 @@
 {
     BOOL canEditRow = YES;
     return canEditRow;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 // Override to support editing the table view.

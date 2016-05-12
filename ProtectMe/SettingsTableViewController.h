@@ -10,6 +10,7 @@
 
 @interface SettingsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *waterMarkImage;
 
 
 @end

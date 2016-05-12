@@ -26,6 +26,12 @@
     self.settingOptions = @[@"Set Numbers", @"Set Messages", @"About Us", @"Contact Us",@"Terms & Conditions"];
     self.title = @"ProtectMe";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    //Background image for the view
+    NSNumber *screenHeight = @([UIScreen mainScreen].bounds.size.height);
+    NSString *imageName = [NSString stringWithFormat:@"waterMark-%@h", screenHeight];
+    UIImage *image = [UIImage imageNamed:imageName];
+    [self.waterMarkImage setImage:image];
+    [self.view sendSubviewToBack:self.waterMarkImage];
     
 }
 
@@ -44,6 +50,24 @@
     }
     cell.textLabel.text = [self.settingOptions objectAtIndex:indexPath.row];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

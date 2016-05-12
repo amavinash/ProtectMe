@@ -53,6 +53,7 @@
     //Background image for the view
     NSNumber *screenHeight = @([UIScreen mainScreen].bounds.size.height);
     NSString *imageName = [NSString stringWithFormat:@"homeScreen-%@h", screenHeight];
+    //NSString *imageName = [NSString stringWithFormat:@"waterMark-%@h", screenHeight];
     UIImage *image = [UIImage imageNamed:imageName];
     [self.backgroundImage setImage:image];
     [self.view sendSubviewToBack:self.backgroundImage];
@@ -66,7 +67,16 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    [self fetchDataFromStore];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,6 +89,9 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"ContactsTable"];
     NSMutableArray *storeRecords = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    //Reset Contacts Array every time fetching data from DB, to avoid duplications.
+    self.contactsArray = [NSMutableArray array];
     for (NSManagedObject *contactItem  in storeRecords)
     {
         [self.contactsArray addObject:[contactItem valueForKey:@"contactNumber"]];
@@ -100,6 +113,7 @@
 
 //MessageViewController Delegate Methods
 - (IBAction)blueButtonTapped:(id)sender {
+    [self fetchDataFromStore];
     if(![MFMessageComposeViewController canSendText])
     {
         
@@ -147,6 +161,7 @@
 }
 
 - (IBAction)redButtonTapped:(id)sender {
+    [self fetchDataFromStore];
     if(![MFMessageComposeViewController canSendText])
     {
         
@@ -173,7 +188,8 @@
         //NSArray *recipents = @[@"012345678", @"9876543210"];
         NSString *lon = [NSString stringWithFormat:@"%.8f", longitudeVal];
         NSString *lat = [NSString stringWithFormat:@"%.8f", lattitudeVal];
-        NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?q=%@,%@",lat,lon];
+        //NSString *locationHyperLink = [NSString stringWithFormat:@"comgooglemaps://?q=%@,%@",lat,lon];
+        NSString *locationHyperLink = [NSString stringWithFormat:@"http://maps.apple.com/?ll=%@,%@",lat,lon];
         
         NSString *message = [NSString stringWithFormat:@"%@ %@", self.redButtonMessage ,locationHyperLink ];
         
@@ -247,7 +263,6 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray*)locations
 {
-    NSLog(@"didUpdateToLocation: %@", locations);
     CLLocation *currentLocation = [locations lastObject];
     
     if (currentLocation != nil) {

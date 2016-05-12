@@ -10,7 +10,7 @@ Scenario 2: Emergency – Use the red button in case of emergency
 •	Shares your current location along with the alert message
 •	Customized contact list – Select up to 5 numbers from your contact list that need to be notified
 •	Process estimated to be at least 5 seconds faster than a normal text message and 15 seconds faster than a call
-•	Designed to be used under circumstances such as pity theft (cell phone, jewelry or wallet robbery), instance of someone following or walking towards you with intent to attack, bullying in college or school, instances of threat in train or bus.
+•	Designed to be used under circumstances such as petty theft (cell phone, jewelry or wallet robbery), instance of someone following or walking towards you with intent to attack, bullying in college or school, instances of threat in train or bus.
 •	Best for use in vulnerable locations such as dark lanes, lonely roads, early morning or late night hours, isolated train stations or bus stops
 
 Disclaimer: Continued use of GPS location services while the app runs in the background may reduce the battery life of your phone.
